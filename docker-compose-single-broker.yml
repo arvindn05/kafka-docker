@@ -1,16 +1,37 @@
-version: '2'
+version: '3.2'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
   kafka:
-    build: .
+    image: wurstmeister/kafka:latest
     ports:
-      - "9092:9092"
+      - target: 9092
+        published: 9092
+        protocol: tcp
+        mode: host
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
-      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_CREATE_TOPICS: "scheduled_report_queue:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
+  kafdrop:
+    build:
+      context: .
+      dockerfile: kafdrop.docker
+    image: arvindn05:kafdrop
+    ports:
+      - target: 9010
+        published: 9010
+        protocol: tcp
+        mode: host
+    environment:
+      ZK_HOSTS: zookeeper:2181
+      LISTEN: 9010
+    depends_on:
+      - zookeeper
+      - kafka

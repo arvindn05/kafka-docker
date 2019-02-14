@@ -1,3 +1,14 @@
+Forked changes
+=====
+This provides an UI front end using the [kafdrop](https://github.com/HomeAdvisor/Kafdrop) project.
+
+Only updated the single broker configuration.
+
+```bash
+docker-compose -f docker-compose-single-broker.yml up
+```
+Kafdrop is accessible via http://localhost:9010
+
 [![Docker Pulls](https://img.shields.io/docker/pulls/wurstmeister/kafka.svg)](https://hub.docker.com/r/wurstmeister/kafka/)
 [![Docker Stars](https://img.shields.io/docker/stars/wurstmeister/kafka.svg)](https://hub.docker.com/r/wurstmeister/kafka/)
 [![](https://images.microbadger.com/badges/version/wurstmeister/kafka.svg)](https://microbadger.com/images/wurstmeister/kafka "Get your own version badge on microbadger.com")
