@@ -12,7 +12,7 @@ services:
         protocol: tcp
         mode: host
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_HOST_NAME: host.docker.internal
       KAFKA_CREATE_TOPICS: "scheduled_report_queue:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
@@ -25,13 +25,13 @@ services:
       dockerfile: kafdrop.docker
     image: arvindn05:kafdrop
     ports:
-      - target: 9010
-        published: 9010
+      - target: 9009
+        published: 9009
         protocol: tcp
         mode: host
     environment:
       ZK_HOSTS: zookeeper:2181
-      LISTEN: 9010
+      LISTEN: 9009
     depends_on:
       - zookeeper
       - kafka

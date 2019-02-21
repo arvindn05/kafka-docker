@@ -7,7 +7,11 @@ Only updated the single broker configuration.
 ```bash
 docker-compose -f docker-compose-single-broker.yml up
 ```
-Kafdrop is accessible via http://localhost:9010
+Kafdrop is accessible via http://localhost:9009
+
+Kafka hostname is advertised as ([host.docker.internal](https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos#i-want-to-connect-from-a-container-to-a-service-on-the-host)). So that kafdrop(and other potential clients running in docker) can communicate with the kafka broker.
+
+Assuming you want to access the kafka broker from the docker host as well, you will need to add an entry in the HOSTS file to map host.docker.internal to 127.0.0.1
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/wurstmeister/kafka.svg)](https://hub.docker.com/r/wurstmeister/kafka/)
 [![Docker Stars](https://img.shields.io/docker/stars/wurstmeister/kafka.svg)](https://hub.docker.com/r/wurstmeister/kafka/)
